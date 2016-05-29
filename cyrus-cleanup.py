@@ -1,26 +1,43 @@
 
 import sys
-if len(sys.argv) !=2:
-    print ' error: no file input\n usage: python cyrus-cleanup.py /home/user/clamoutput.txt'
-    sys.exit(2)
+import re
+filename = raw_input("Enter the location of clamav output \n e.g. /home/user/clamoutput.txt : ")
 
-in_file = open(sys.argv.pop())
-clamav_cyrus_scan = in_file.read() 
-in_file.close()
+try:
+    in_file = open(filename)
+    clamav_cyrus_scan = in_file.read() 
+    in_file.close()
+except:
+    print "File cannot be opened:", filename 
+    exit()
 
 file_lines = clamav_cyrus_scan.split('\n')
+virus_lines = []
+
+try:
+    for line in file_lines:
+        while line.split()[-1] == 'FOUND':
+            virus_lines.append(line)
+            break
+except IndexError:
+    pass;
 
 user_list = []
 virus_list = []
 
 try:
-    for line in file_lines:
-        line_split = line.split(':')
-        file_fix = line_split[0].split(" ")
-        split_file = line_split[0].split("/")
-        virus_split = line_split[1].split()
-        user_list.append(split_file[7])
-        virus_list.append(virus_split[0])
+    for line in virus_lines:
+        line_split = re.split('[/ ]', line) 
+        user_list.append(line_split[7])
+        virus_split = re.split('[:-]', line)
+#        print line_split[9]
+         
+#        line_split = line.split(':')
+#        file_fix = line_split[0].split(" ")
+#        split_file = line_split[0].split("/")
+#        virus_split = line_split[1].split()
+#        user_list.append(split_file[7])
+#        virus_list.append(virus_split[0])
 except IndexError:
    pass;
 
@@ -33,6 +50,6 @@ print "virus found in the following user directories:"
 for users in set(user_list):
     print "{:20}" .format(users)
 
-print "the following virus were found:"
-for virus in set(virus_list):
-    print "{:20}" .format(virus)
+#print "the following virus were found:"
+#for virus in set(virus_list):
+#    print "{:20}" .format(virus)
