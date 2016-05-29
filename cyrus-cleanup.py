@@ -27,10 +27,12 @@ virus_list = []
 
 try:
     for line in virus_lines:
-        line_split = re.split('[/ ]', line) 
+        line_split = re.split('[/ ]', line)
+        print line_split 
+        #space, var, spool, cyrus, mail, letter, user, username, folder, file, detected, found = line_split
         user_list.append(line_split[7])
         virus_split = re.split('[:-]', line)
-#        print line_split[9]
+#        print username 
          
 #        line_split = line.split(':')
 #        file_fix = line_split[0].split(" ")
