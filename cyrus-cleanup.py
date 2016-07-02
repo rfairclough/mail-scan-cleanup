@@ -1,7 +1,7 @@
 
 import sys
 import re
-filename = raw_input("Enter the location of clamav output \n e.g. /home/user/clamoutput.txt : ")
+filename = raw_input("Enter the location of clamav output \n e.g. /home/user/clamoutput.txt : \n")
 
 try:
     in_file = open(filename)
@@ -24,36 +24,42 @@ except IndexError:
 
 user_list = []
 virus_list = []
+virus_files =[]
 
 try:
     for line in virus_lines:
         line_split = re.split('[/ :]', line)
-        print line_split 
+        #print line_split 
         #space, var, spool, cyrus, mail, letter, user, username, folder, file, detected, found = line_split
         user_list.append(line_split[7])
         virus_split = re.split('[ :-]', line)
         virus_list.append(virus_split[-3])
-#        print username 
-         
-#        line_split = line.split(':')
-#        file_fix = line_split[0].split(" ")
-#        split_file = line_split[0].split("/")
-#        virus_split = line_split[1].split()
-#        user_list.append(split_file[7])
-#        virus_list.append(virus_split[0])
 except IndexError:
    pass;
 
-#    if len(line_fix) ==2:
-#        print "rm {:20}\ {:20}" .format(line_fix[0],line_fix[1])
-#    else:
-#        print "rm {:20}" .format(line_fix[0])
+try:
+    for line in virus_lines:
+        line_split = re.split('[:]', line)
+        virus_files.append[line_split[0]
+except IndexError:
+   pass;
+
+
+
+
+
 
 print "virus found in the following user directories:" 
 for users in set(user_list):
     print "{:20}" .format(users)
     "\n"
 
-print "the following virus were found:"
+print "\nthe following virus were found:"
 for virus in set(virus_list):
     print "{:20}" .format(virus)
+
+
+print "run this:"
+for files in virus_files: 
+    print "{:20}" .format(files)
+
