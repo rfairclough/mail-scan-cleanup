@@ -27,11 +27,12 @@ virus_list = []
 
 try:
     for line in virus_lines:
-        line_split = re.split('[/ ]', line)
+        line_split = re.split('[/ :]', line)
         print line_split 
         #space, var, spool, cyrus, mail, letter, user, username, folder, file, detected, found = line_split
         user_list.append(line_split[7])
-        virus_split = re.split('[:-]', line)
+        virus_split = re.split('[ :-]', line)
+        virus_list.append(virus_split[-3])
 #        print username 
          
 #        line_split = line.split(':')
@@ -51,7 +52,8 @@ except IndexError:
 print "virus found in the following user directories:" 
 for users in set(user_list):
     print "{:20}" .format(users)
+    "\n"
 
-#print "the following virus were found:"
-#for virus in set(virus_list):
-#    print "{:20}" .format(virus)
+print "the following virus were found:"
+for virus in set(virus_list):
+    print "{:20}" .format(virus)
