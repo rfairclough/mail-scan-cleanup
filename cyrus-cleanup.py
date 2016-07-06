@@ -1,14 +1,33 @@
+
+
+import jtextfsm as textfsm
+
+
 import sys
 import re
-filename = raw_input("Enter the location of clamav output \n e.g. /home/user/clamoutput.txt : \n")
+#filename = raw_input("Enter the location of clamav output \n e.g. /home/user/clamoutput.txt : \n")
 
 try:
-    in_file = open(filename)
-    clamav_cyrus_scan = in_file.read() 
+#    in_file = open(filename)
+    in_file = open("/root/cyrusavscan")
+    raw_text_data = in_file.read() 
     in_file.close()
 except:
     print "File cannot be opened:", filename 
     exit()
+
+template = open("clamav_cyrus_parser.template")
+
+
+
+
+
+
+
+
+
+
+
 
 file_lines = clamav_cyrus_scan.split('\n')
 virus_lines = []
