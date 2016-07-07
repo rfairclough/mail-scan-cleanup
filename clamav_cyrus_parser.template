@@ -3,5 +3,5 @@ Value THREAT (\S+)
 Value Fillup FILECOUNT (\d+)
 
 Start
-  ^${FILESTRUCTURE}:\s${THREAT}\sFOUND
-  ^Infected files:\s${FILECOUNT} -> Record
+  ^${FILESTRUCTURE}:\s${THREAT}\sFOUND -> Record
+  ^Infected files:\s${FILECOUNT}
