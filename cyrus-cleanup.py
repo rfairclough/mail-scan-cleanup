@@ -20,6 +20,10 @@ template = open("clamav_cyrus_parser.template")
 fsm_table = textfsm.TextFSM(template)
 fsm_results = fsm_table.ParseText(raw_text_data)
 
+outfile = open("cleanup.sh", "w+")
+outfile.write ("#!/bin/bash \n\n")
+
+
 user_list = []
 virus_list = []
 virus_files =[]
@@ -27,11 +31,12 @@ virus_files =[]
 try:
     for table_line in fsm_results:
         user_list.append(table_line[0].split('/')[7])
+        outfile.write ("rm -f %s\n" % table_line[0])
         virus_list.append(table_line[1].split('-')[0])
 except IndexError:
    pass;
 
-
+outfile.close
 
 
 
@@ -46,4 +51,7 @@ print "\r"
 print "the following virus were found:"
 for virus in set(virus_list):
     print "    {}" .format(virus)
+ 
+print "\r"
 
+print "number of files found: {}" .format(len(fsm_results))
