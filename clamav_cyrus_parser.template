@@ -1,7 +1,7 @@
 Value FILESTRUCTURE (\S+\s\S+|\S+) 
 Value THREAT (\S+) 
-Value Fillup FILECOUNT (\d+)
+#Value Fillup FILECOUNT (\d+)
 
 Start
   ^${FILESTRUCTURE}:\s${THREAT}\sFOUND -> Record
-  ^Infected files:\s${FILECOUNT}
+#  ^Infected files:\s${FILECOUNT}

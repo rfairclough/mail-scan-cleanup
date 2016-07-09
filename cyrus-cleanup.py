@@ -1,6 +1,6 @@
+#! /usr/bin/env python
 
-
-import jtextfsm as textfsm
+import textfsm
 
 
 import sys
@@ -17,39 +17,16 @@ except:
     exit()
 
 template = open("clamav_cyrus_parser.template")
-
-
-
-
-
-
-
-
-
-
-
-
-file_lines = clamav_cyrus_scan.split('\n')
-virus_lines = []
-
-try:
-    for line in file_lines:
-        while line.split()[-1] == 'FOUND':
-            virus_lines.append(line)
-            break
-except IndexError:
-    pass;
+fsm_table = textfsm.TextFSM(template)
+fsm_results = fsm_table.ParseText(raw_text_data)
 
 user_list = []
 virus_list = []
 virus_files =[]
 
 try:
-    for line in virus_lines:
-        line_split = re.split('[/ :]', line)
-        #print line_split 
-        #space, var, spool, cyrus, mail, letter, user, username, folder, file, detected, found = line_split
-        user_list.append(line_split[7])
+    for table_line in fsm_results:
+        user_list.append(table_line[0].split('/')[7])
         virus_split = re.split('[ :-]', line)
         virus_list.append(virus_split[-3])
 except IndexError:
