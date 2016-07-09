@@ -36,6 +36,9 @@ try:
 except IndexError:
    pass;
 
+for user in set(user_list):
+    outfile.write ("su - cyrus -c \"/usr/lib/cyrus/bin/reconstruct -k -r -f user/%s\"\n" % user )
+
 outfile.close
 
 
