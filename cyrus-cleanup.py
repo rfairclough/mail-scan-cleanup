@@ -27,15 +27,7 @@ virus_files =[]
 try:
     for table_line in fsm_results:
         user_list.append(table_line[0].split('/')[7])
-        virus_split = re.split('[ :-]', line)
-        virus_list.append(virus_split[-3])
-except IndexError:
-   pass;
-
-try:
-    for line in virus_lines:
-        line_split = re.split('[:]', line)
-        virus_files.append[line_split[0]
+        virus_list.append(table_line[1].split('-')[0])
 except IndexError:
    pass;
 
@@ -43,17 +35,15 @@ except IndexError:
 
 
 
+print "\r"
 
-print "virus found in the following user directories:" 
+print "virus or malware was found in the following user directories:" 
 for users in set(user_list):
-    print "{:20}" .format(users)
-    "\n"
+    print "    {}" .format(users)
 
-print "\nthe following virus were found:"
+print "\r"
+
+print "the following virus were found:"
 for virus in set(virus_list):
-    print "{:20}" .format(virus)
+    print "    {}" .format(virus)
 
-
-print "run this:"
-for files in virus_files: 
-    print "{:20}" .format(files)
