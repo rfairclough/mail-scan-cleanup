@@ -31,7 +31,7 @@ virus_files =[]
 try:
     for table_line in fsm_results:
         user_list.append(table_line[0].split('/')[7])
-        outfile.write ("rm -f %s\n" % table_line[0])
+        outfile.write ("rm -f \"%s\"\n" % table_line[0])
         virus_list.append(table_line[1].split('-')[0])
 except IndexError:
    pass;
@@ -59,3 +59,7 @@ for virus in set(virus_list):
 print "\r"
 
 print "number of files found: {}" .format(len(fsm_results))
+
+print "\r"
+
+print "to finalise and remove the files run \"bash cleanup.sh\""
